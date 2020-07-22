@@ -15,6 +15,7 @@ mongoose.connection.on(
 );
 
 (async function () {
+
   const courier1 = new CourierModel({
     userName: "Alex",
     phone: "+79161234567",
@@ -22,5 +23,6 @@ mongoose.connection.on(
     password: await bcrypt.hash("password", 10)
   });
   await courier1.save();
+
   await mongoose.disconnect();
 })();
