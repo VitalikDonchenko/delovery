@@ -15,15 +15,14 @@ mongoose.connection.on(
 );
 
 (async function () {
-  const user1 = new UserModel({
+
+  const courier1 = new CourierModel({
     userName: "Alex",
     phone: "+79161234567",
     email: "alex@example.com",
-    password: await bcrypt.hash("password", 10),
-    location: "Location",
-    ordersArchive: [],
-    currentOrder: null,
+    password: await bcrypt.hash("password", 10)
   });
-  await user1.save();
+  await courier1.save();
+
   await mongoose.disconnect();
 })();
