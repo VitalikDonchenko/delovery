@@ -4,7 +4,7 @@ import User from '../models/userModel.js';
 const router = express.Router();
 
 router.get('/signup', (req, res) => {
-  res.render('userSignup');
+  res.render('user/userSignup');
 });
 
 router.post('/signup', async (req, res) => {
