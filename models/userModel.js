@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { offerScheme } from "./offerModel.js";
 
 const userScheme = mongoose.Schema({
   userName: String,
@@ -6,8 +7,8 @@ const userScheme = mongoose.Schema({
   email: String,
   password: String,
   location: String,
-  ordersArchive: [orderScheme],
-  currentOrder: orderScheme,
+  ordersArchive: [offerScheme],
+  currentOrder: offerScheme,
 });
 
 export default mongoose.model("users", userScheme);
