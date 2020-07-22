@@ -10,17 +10,17 @@ router.get('/signup', (req, res) => {
 router.post('/signup', async (req, res) => {
   const {
     userName,
-    phone,
-    email,
-    location,
-    password,
+    userPhone,
+    userEmail,
+    userPassword,
+    userLocation,
   } = req.body;
   const newUser = new User({
     userName,
-    phone,
-    email,
-    location,
-    password,
+    phone: userPhone,
+    email: userEmail,
+    password: userPassword,
+    location: userLocation,
   });
   await newUser.save();
   res.redirect('/offers');
