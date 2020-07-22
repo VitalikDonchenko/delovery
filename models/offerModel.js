@@ -4,6 +4,8 @@ export const offerScheme = mongoose.Schema({
 
   contents: [String],
 
+  picSrc: String,
+
   price: Number,
 });
 
