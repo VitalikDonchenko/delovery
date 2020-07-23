@@ -36,4 +36,8 @@ router.get('/newOffer', (req, res) => {
   res.render('courier/courierNewOffer');
 });
 
+router.post('/newOffer', (req, res) => {
+  
+});
+
 export default router;
