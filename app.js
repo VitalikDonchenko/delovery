@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import FileStoreGeneral from 'session-file-store';
 import useErrorHandlers from './middleware/error-handlers.js';
+import sessionLocals from './middleware/sessionLocals.js';
 
 import indexRouter from './routes/indexRouter.js';
 import offersRouter from './routes/offersRouter.js';
@@ -39,14 +40,19 @@ app.use(
   }),
 );
 
+app.use(sessionLocals);
+app.use(cookiesCleaner);
+
 app.use((req, res, next) => {
-  console.log(req.session)
+  // console.log(req.session)
   if (req.session.user) {
-    res.locals.data = JSON.stringify(req.session.user)
+    res.locals.data = JSON.stringify(req.session.user);
   }
+
   next()
 })
 app.use(cookiesCleaner);
+
 
 app.set('view engine', 'hbs');
 app.use('/', indexRouter);
