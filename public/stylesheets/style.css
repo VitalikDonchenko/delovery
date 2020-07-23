@@ -1,0 +1,14 @@
+
+body{
+background-color: #63AFD0;
+color: #black;
+padding-left: 20px;
+}
+
+.logo {
+    /* background-image: url(/img/delivery-computer-icons-courier-business-buying-and-selling.jpg); */
+    width: 50px;
+    height: 50px;
+    /* background-color: black; */
+}
+

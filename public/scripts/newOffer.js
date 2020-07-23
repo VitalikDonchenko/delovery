@@ -11,6 +11,7 @@ newInputButton.addEventListener("click", (e) => {
     const newInput =  document.createElement('input');
     newInput.type = 'text';
     newInput.name = generatedInput.value;
+    newInput.className+="form-control";
     newInput.placeholder='Введите название товара';
     const container = document.getElementById('offerInputsContainer');
     container.appendChild(document.createElement('br'));

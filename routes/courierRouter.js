@@ -1,5 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
+
 import Couriers from '../models/courierModel.js';
 import { OfferModel } from '../models/offerModel.js';
 
@@ -71,6 +72,7 @@ router.post('/newOffer', async (req, res) => {
     price,
     createdAt: new Date(),
   });
+  console.log(req.session.courier);
   await newOffer.save();
 
   res.redirect('/');

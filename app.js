@@ -21,6 +21,7 @@ mongoose.connect('mongodb://localhost:27017/delovery', {
   useUnifiedTopology: true,
 });
 
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
@@ -30,7 +31,7 @@ app.use(
   session({
     store: new FileStore(),
     key: 'user_sid',
-    secret: 'kataus licom po klave',
+    secret: 'kataus litcom po klave',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -47,8 +48,11 @@ app.use((req, res, next) => {
   if (req.session.user) {
     res.locals.data = JSON.stringify(req.session.user);
   }
-  next();
-});
+
+  next()
+})
+app.use(cookiesCleaner);
+
 
 app.set('view engine', 'hbs');
 app.use('/', indexRouter);
