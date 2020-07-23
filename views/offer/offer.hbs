@@ -1,22 +1,18 @@
-<h2>Offers:</h2>
+<h1><span class="badge badge-secondary badge-pill badge-dark">Страница оформления заказа:</span></h1><br>
 
-{{!-- <div id="logoHolder">
-  <img src="{{}}" alt="logoRestoran">
-</div>
-
-<main role="main">
-  <ul class="offers">
-    {{#each offers}}
-    <li class="entry" id = "{{_id}}">
-      <img src="{{}}" alt="logoRestoran">
+Вы выбрали следующие позиции:
+    <div class="entry" id = "{{offer._id}}"></div>
+      {{!-- <img src="{{}}" alt="logoRestoran"> --}}
       <ul class="contents">
-      {{#each contents}}
+      {{#each offer.contents}}
       <li>{{this}}</li>
       {{/each}}
       </ul>
     </li>
-    <div>{{price}}</div>
+    <div>Стоимость Вашего заказа составила: {{offer.price}} рублей</div>
+    <div>Дата и время оформления заказа: {{offer.createdAt}}</div>
     <a href="./offers/{{_id}}"></a>
-    {{/each}}
-  </ul>
-</main> --}}
+
+    <div>Для оплаты заказа нажмите кнопку "Оплатить"</div>
+    <button class="btn btn btn-dark">Оплатить заказ</button>
+  
