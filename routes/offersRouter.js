@@ -10,12 +10,8 @@ router.get('/', async (req, res) => {
   res.render('offer/offers', { offers });
 });
 
-router.get('/:id', (req, res) => {
-  const offer = {
-    _id: 1,
-    contents: ['dkfjbkdfhgkd', 'sdkfjksgfksgfjksf'],
-    price: 50,
-    createdAt: '12 dec 2020'
+router.get('/:id', async (req, res) => {
+  const offer = await OfferModel.findById()
   }
   res.render('offer/offer', { offer });
 });
