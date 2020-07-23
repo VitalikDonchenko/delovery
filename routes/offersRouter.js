@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const offers = await OfferModel.find();
+  // console.log(offersList);
   res.render('offer/offers', { offers });
 });
 

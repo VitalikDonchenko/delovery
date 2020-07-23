@@ -1,9 +1,9 @@
 <h1><span class="badge badge-secondary badge-pill badge-dark">Страница оформления заказа:</span></h1><br>
-
 Вы выбрали следующие позиции:
     <div class="entry" id = "{{offer._id}}"></div>
       {{!-- <img src="{{}}" alt="logoRestoran"> --}}
       <ul class="contents">
+
       {{#each offer.contents}}
       <li>{{this}}</li>
       {{/each}}
@@ -15,4 +15,3 @@
 
     <div>Для оплаты заказа нажмите кнопку "Оплатить"</div>
     <button class="btn btn btn-dark">Оплатить заказ</button>
-  

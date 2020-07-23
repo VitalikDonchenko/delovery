@@ -66,13 +66,14 @@ router.post('/newOffer', async (req, res) => {
     picSrc = 'BurgerKing';
   }
 
+  const courierId = req.session.courier._id;
   const newOffer = new OfferModel({
     contents: [newOffer1, newOffer2],
     picSrc,
     price,
     createdAt: new Date(),
+    courierId,
   });
-  console.log(req.session.courier);
   await newOffer.save();
 
   res.redirect('/');
