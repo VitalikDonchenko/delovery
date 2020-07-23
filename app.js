@@ -9,7 +9,7 @@ import indexRouter from './routes/indexRouter.js';
 import offersRouter from './routes/offersRouter.js';
 import userRouter from './routes/userRouter.js';
 import courierRouter from './routes/courierRouter.js';
-import ordersRouter from './routes/ordersRouter.js';
+import newOfferRouter from './routes/newOfferRouter.js';
 
 const FileStore = FileStoreGeneral(session);
 
@@ -42,7 +42,7 @@ app.set('view engine', 'hbs');
 
 app.use('/', indexRouter);
 app.use('/offers', offersRouter);
-app.use('/orders', ordersRouter);
+app.use('/newOffer', newOfferRouter);
 app.use('/user', userRouter);
 app.use('/courier', courierRouter);
 

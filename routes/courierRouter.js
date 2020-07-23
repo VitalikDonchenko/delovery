@@ -22,7 +22,7 @@ router.post('/signup', async (req, res) => {
     password: courierpassword,
   });
   await newCouriers.save();
-  res.redirect('/orders');
+  res.redirect('/newOffer');
 });
 
 export default router;
