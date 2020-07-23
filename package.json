@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/KovinkoR/delovery#readme",
   "dependencies": {
-    "@googlemaps/google-maps-services-js": "^3.1.4",
     "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
