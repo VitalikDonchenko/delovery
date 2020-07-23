@@ -4,11 +4,13 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import FileStoreGeneral from 'session-file-store';
 import useErrorHandlers from './middleware/error-handlers.js';
+import sessionLocals from './middleware/sessionLocals.js';
 
 import indexRouter from './routes/indexRouter.js';
 import offersRouter from './routes/offersRouter.js';
 import userRouter from './routes/userRouter.js';
 import courierRouter from './routes/courierRouter.js';
+import { cookiesCleaner } from './middleware/sessionWorker.js'
 
 const FileStore = FileStoreGeneral(session);
 
@@ -19,6 +21,7 @@ mongoose.connect('mongodb://localhost:27017/delovery', {
   useUnifiedTopology: true,
 });
 
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
@@ -28,7 +31,7 @@ app.use(
   session({
     store: new FileStore(),
     key: 'user_sid',
-    secret: 'anything here',
+    secret: 'kataus litcom po klave',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -36,6 +39,20 @@ app.use(
     },
   }),
 );
+
+app.use(sessionLocals);
+app.use(cookiesCleaner);
+
+app.use((req, res, next) => {
+  // console.log(req.session)
+  if (req.session.user) {
+    res.locals.data = JSON.stringify(req.session.user);
+  }
+
+  next()
+})
+app.use(cookiesCleaner);
+
 
 app.set('view engine', 'hbs');
 app.use('/', indexRouter);
