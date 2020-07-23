@@ -8,7 +8,6 @@ const courierScheme = mongoose.Schema({
   password: String,
   ordersArchive: [offerScheme],
   currentOrder: offerScheme,
-  location: String,
 });
 
 export default mongoose.model("couriers", courierScheme);
