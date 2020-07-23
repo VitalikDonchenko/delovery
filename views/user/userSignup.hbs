@@ -1,11 +1,17 @@
-  <h2>Sign up</h1><br />
+<h1 class="signup">Sign up</h1><br />
 
 <form action="/user/signup" method="post">
-  <input type="text" name="userName" placeholder="name"/>
-  <input type="phone" name="userPhone" placeholder="phone"/>
-  <input type="mail" name="userEmail" placeholder="email"/>
-  <input type="password" name="userPassword" placeholder="password"/>
-  <input type="text" name="userLocation" placeholder="adress"/>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input class="form-control" type="text" name="userName" placeholder="name" /><br>
+      <input class="form-control" type="phone" name="userPhone" placeholder="phone" /><br>
 
-  <button type="submit" value="Sign Up" title="Submit form"><span>Sign up</span></button>
+      <input class="form-control" type="mail" name="userEmail" placeholder="email" /><br>
+      <input class="form-control" type="password" name="userPassword" placeholder="password" /><br>
+      <input class="form-control" type="text" name="userLocation" placeholder="adress" /><br>
+
+      <button type="submit" value="Sign Up" title="Submit form" type="button" class="btn btn btn-dark"><span>Sign
+          up</span></button>
+    </div>
+  </div>
 </form>

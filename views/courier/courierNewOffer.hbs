@@ -1,14 +1,24 @@
 <h1>Разместить заказ</h1>
 
-<form id='newOffer' method='post' action='/signup'>
-<select>
-  <option>Macdonalds</option>
-  <option>KFS</option>
-  <option>BurgerKing</option>
-</select>
-<input type='text' name='newOffer' placeholder='Введите название товара'>
-<input type='text' name='newOffer' placeholder='Введите название товара'>
-<button>Дрбавить позицию в заказ</button>
-<input type='text' name='price' placeholder='Введите стоимость заказа'>
-<button type='submit' name='buttonOffer'>Разместить заказ</button>
+<form id='newOffer' method='post' action='/newOffer'>
+<div class="form-row">
+  <div class="form-group col-md-6">
+  <select class="btn btn-secondary dropdown-toggle">
+    <option>Macdonalds</option>
+    <option>KFS</option>
+    <option>BurgerKing</option>
+  </select><br>
+
+  <br><div id="offerInputsContainer" display="inline-block">
+  <input class="form-control" type='text' name='newOffer1' placeholder='Введите название товара'>
+  </div><br>
+  <button class="btn btn btn-dark" id="goodInput">Add</button><br>
+  <br>
+  <input class="form-control" type='text' name='price' placeholder='Введите стоимость заказа'>
+  <br>
+  <button class="btn btn btn-dark" type='submit'>Разместить заказ</button>
+  </div>
+</div>
 </form>
+
+<script src="/scripts/newOffer.js"></script>
