@@ -1,9 +1,18 @@
 <header>
   <div class='logo'>Наш логотип</div>
 </header>
+
+{{#if user}}
+<a href="/offer">{{user.userName}}</a>
+<a href="/logout">logout</a>
+{{else if courier}}
+<a href="/offer">{{courier.userName}}</a>
+<a href="/logout">logout</a>
+{{else}}
+
 <p>
   <a href="/" id="userLoginButton">Войти</a>
-<form action="/user" method="post" style="display: none"  id="userLoginForm">
+<form action="/user" method="post" style="display: none" id="userLoginForm">
   <input type="text" name="email" placeholder="e-mail">
   <input type="password" name="password" placeholder="password">
   <button type="submit">Submit</button>
@@ -24,3 +33,5 @@
 </p>
 
 <script src="/scripts/userLoginShow.js"></script>
+
+{{/if}}
