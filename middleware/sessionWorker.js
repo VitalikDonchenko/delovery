@@ -15,7 +15,7 @@ const sessionCourierChecker = (req, res, next) => {
 };
 
 function cookiesCleaner(req, res, next) {
-  if (req.cookies.user_sid && !req.session.user || req.cookies.courier_sid && !req.session.courier) {
+  if (req.cookies.user_sid && !req.session.user && !req.session.courier) {
     res.clearCookie("user_sid");
   }
   next();
