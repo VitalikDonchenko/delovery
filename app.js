@@ -9,7 +9,6 @@ import indexRouter from './routes/indexRouter.js';
 import offersRouter from './routes/offersRouter.js';
 import userRouter from './routes/userRouter.js';
 import courierRouter from './routes/courierRouter.js';
-import newOfferRouter from './routes/newOfferRouter.js';
 
 const FileStore = FileStoreGeneral(session);
 
@@ -33,7 +32,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 600000,
+      expires: 1000 * 60 * 60 * 24 * 365,
     },
   }),
 );
@@ -42,7 +41,6 @@ app.set('view engine', 'hbs');
 
 app.use('/', indexRouter);
 app.use('/offers', offersRouter);
-app.use('/newOffer', newOfferRouter);
 app.use('/user', userRouter);
 app.use('/courier', courierRouter);
 
