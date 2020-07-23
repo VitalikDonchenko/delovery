@@ -1,12 +1,13 @@
 import express from 'express';
 import Couriers from '../models/courierModel.js';
 import bcrypt from 'bcrypt';
+import { sessionCourierChecker, sessionUserChecker } from '../middleware/sessionWorker.js'
 
 console.log('started courier');
 
 const router = express.Router();
 
-router.get('/signup', (req, res) => {
+router.get('/signup', sessionUserChecker, sessionCourierChecker, (req, res) => {
   res.render('courier/courierSignup');
 });
 
