@@ -4,16 +4,16 @@ import User from '../models/userModel.js';
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
-  const { email, password } = req.body;
-  const find = await User.findOne({ email, password });
-  if (find && await bcrypt.compare(password, find.password)) {
-    req.session.user = find;
-    res.redirect('/offers');
-  } else {
-    res.redirect('signup');
-  }
-});
+// router.post('/', async (req, res) => {
+//   const { email, password } = req.body;
+//   const find = await User.findOne({ email });
+//   if (find && await bcrypt.compare(password, find.password)) {
+//     console.log("find");
+//     req.session.user = find;
+//     return res.redirect('/offers');
+//   }
+//   return res.redirect('signup');
+// });
 
 router.get('/signup', (req, res) => {
   res.render('user/userSignup');

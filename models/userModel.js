@@ -3,8 +3,8 @@ import { offerScheme } from "./offerModel.js";
 
 const userScheme = mongoose.Schema({
   userName: String,
-  phone: String,
-  email: String,
+  phone: { type: String, unique: true },
+  email: { type: String, unique: true },
   password: String,
   location: String,
   ordersArchive: [offerScheme],
