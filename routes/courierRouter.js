@@ -1,13 +1,22 @@
 import express from 'express';
-import Couriers from '../models/courierModel.js';
 import bcrypt from 'bcrypt';
-import { sessionCourierChecker, sessionUserChecker } from '../middleware/sessionWorker.js'
 
-console.log('started courier');
+import Couriers from '../models/courierModel.js';
+import { OfferModel } from '../models/offerModel.js';
 
 const router = express.Router();
 
-router.get('/signup', sessionUserChecker, sessionCourierChecker, (req, res) => {
+router.post('/', async (req, res) => {
+  const { email, password } = req.body;
+  const findCourier = await Couriers.findOne({ email });
+  if (findCourier && await bcrypt.compare(password, findCourier.password)) {
+    req.session.courier = findCourier;
+    return res.redirect('/courier/newOffer');
+  }
+  return res.redirect('/');
+});
+
+router.get('/signup', (req, res) => {
   res.render('courier/courierSignup');
 });
 
@@ -27,6 +36,7 @@ router.post('/signup', async (req, res) => {
       password: await bcrypt.hash(courierpassword, 10),
     });
     await newCouriers.save();
+    req.session.courier = newCouriers;
     res.redirect('/courier/newOffer');
   } catch (error) {
     console.log('BD courierSave is NOT working!');
@@ -37,8 +47,35 @@ router.get('/newOffer', (req, res) => {
   res.render('courier/courierNewOffer');
 });
 
-router.post('/newOffer', (req, res) => {
-  
+router.post('/newOffer', async (req, res) => {
+  const {
+    select,
+    newOffer1,
+    newOffer2,
+    price,
+  } = req.body;
+
+  let picSrc;
+  if (select === 'Macdonalds') {
+    picSrc = 'Macdonalds';
+  }
+  if (select === 'KFC') {
+    picSrc = 'KFC';
+  }
+  if (select === 'KFC') {
+    picSrc = 'BurgerKing';
+  }
+
+  const newOffer = new OfferModel({
+    contents: [newOffer1, newOffer2],
+    picSrc,
+    price,
+    createdAt: new Date(),
+  });
+  console.log(req.session.courier);
+  await newOffer.save();
+
+  res.redirect('/');
 });
 
 export default router;

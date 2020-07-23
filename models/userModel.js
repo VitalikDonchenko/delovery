@@ -7,6 +7,7 @@ const userScheme = mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
   location: String,
+  coordinates: String,
   ordersArchive: [offerScheme],
   currentOrder: offerScheme,
 });
