@@ -1,5 +1,8 @@
 import express from 'express';
 import User from '../models/userModel.js';
+import bcrypt from 'bcrypt';
+
+console.log('started user');
 
 const router = express.Router();
 
@@ -8,23 +11,28 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-  const {
-    userName,
-    userPhone,
-    userEmail,
-    userPassword,
-    userLocation,
-  } = req.body;
+  try {
+    const {
+      userName,
+      userPhone,
+      userEmail,
+      userPassword,
+      userLocation,
+    } = req.body;
 
-  const newUser = new User({
-    userName,
-    phone: userPhone,
-    email: userEmail,
-    password: userPassword,
-    location: userLocation,
-  });
-  await newUser.save();
-  res.redirect('/offers');
+    const newUser = new User({
+      userName,
+      phone: userPhone,
+      email: userEmail,
+      password: await bcrypt.hash(userPassword, 10),
+      location: userLocation,
+    });
+    await newUser.save();
+    req.session.user =  newUser;
+    res.redirect('/offers');
+  } catch (error) {
+    console.log('BD userSave is NOT working!');
+  }
 });
 
 export default router;
