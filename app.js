@@ -38,7 +38,6 @@ app.use(
 );
 
 app.set('view engine', 'hbs');
-
 app.use('/', indexRouter);
 app.use('/offers', offersRouter);
 app.use('/user', userRouter);
