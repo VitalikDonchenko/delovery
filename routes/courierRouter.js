@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
   const { email, password } = req.body;
   const findCourier = await Couriers.findOne({ email });
   if (findCourier && await bcrypt.compare(password, findCourier.password)) {
-    req.session.user = findCourier;
+    req.session.courier = findCourier;
     return res.redirect('/');
   }
   return res.redirect('/');
@@ -35,7 +35,7 @@ router.post('/signup', async (req, res) => {
       password: await bcrypt.hash(courierpassword, 10),
     });
     await newCouriers.save();
-    req.session.user = newCouriers;
+    req.session.courier = newCouriers;
     res.redirect('/courier/newOffer');
   } catch (error) {
     console.log('BD courierSave is NOT working!');
