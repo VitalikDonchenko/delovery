@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
   const findCourier = await Couriers.findOne({ email });
   if (findCourier && await bcrypt.compare(password, findCourier.password)) {
     req.session.courier = findCourier;
-    return res.redirect('/');
+    return res.redirect('/courier/newOffer');
   }
   return res.redirect('/');
 });
@@ -73,7 +73,7 @@ router.post('/newOffer', async (req, res) => {
   });
   await newOffer.save();
 
-  res.redirect('newOffer');
+  res.redirect('/');
 });
 
 export default router;
