@@ -1,29 +1,45 @@
 import express from 'express';
+import bcrypt from 'bcrypt';
 import Couriers from '../models/courierModel.js';
 import { OfferModel } from '../models/offerModel.js';
 
 const router = express.Router();
+
+router.post('/', async (req, res) => {
+  const { email, password } = req.body;
+  const findCourier = await Couriers.findOne({ email });
+  if (findCourier && await bcrypt.compare(password, findCourier.password)) {
+    req.session.user = findCourier;
+    return res.redirect('/');
+  }
+  return res.redirect('/');
+});
 
 router.get('/signup', (req, res) => {
   res.render('courier/courierSignup');
 });
 
 router.post('/signup', async (req, res) => {
-  const {
-    courierName,
-    courierphone,
-    courieremail,
-    courierpassword,
-  } = req.body;
+  try {
+    const {
+      courierName,
+      courierphone,
+      courieremail,
+      courierpassword,
+    } = req.body;
 
-  const newCouriers = new Couriers({
-    userName: courierName,
-    phone: courierphone,
-    email: courieremail,
-    password: courierpassword,
-  });
-  await newCouriers.save();
-  res.redirect('/courier/newOffer');
+    const newCouriers = new Couriers({
+      userName: courierName,
+      phone: courierphone,
+      email: courieremail,
+      password: await bcrypt.hash(courierpassword, 10),
+    });
+    await newCouriers.save();
+    req.session.user = newCouriers;
+    res.redirect('/courier/newOffer');
+  } catch (error) {
+    console.log('BD courierSave is NOT working!');
+  }
 });
 
 router.get('/newOffer', (req, res) => {
