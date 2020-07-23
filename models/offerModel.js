@@ -5,6 +5,9 @@ export const offerScheme = mongoose.Schema({
   picSrc: String,
   price: Number,
   createdAt: Date,
+  courierId: String,
+  location: String,
+  coordinates: String,
 });
 
 export const OfferModel = mongoose.model("offers", offerScheme);

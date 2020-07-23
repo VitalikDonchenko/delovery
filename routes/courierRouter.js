@@ -11,13 +11,12 @@ router.post('/', async (req, res) => {
   const findCourier = await Couriers.findOne({ email });
   if (findCourier && await bcrypt.compare(password, findCourier.password)) {
     req.session.courier = findCourier;
-    return res.redirect('/');
+    return res.redirect('/courier/newOffer');
   }
   return res.redirect('/');
 });
 
 router.get('/signup', (req, res) => {
-
   res.render('courier/courierSignup');
 });
 
@@ -73,9 +72,10 @@ router.post('/newOffer', async (req, res) => {
     price,
     createdAt: new Date(),
   });
+  console.log(req.session.courier);
   await newOffer.save();
 
-  res.redirect('newOffer');
+  res.redirect('/');
 });
 
 export default router;
