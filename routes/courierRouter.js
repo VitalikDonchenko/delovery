@@ -1,5 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
+
 import Couriers from '../models/courierModel.js';
 import { OfferModel } from '../models/offerModel.js';
 
@@ -16,6 +17,7 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
+
   res.render('courier/courierSignup');
 });
 
