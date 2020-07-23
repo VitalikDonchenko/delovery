@@ -10,17 +10,12 @@ router.get('/', async (req, res) => {
   res.render('offer/offers', { offers });
 });
 
-router.get('/:id', (req, res) => {
-  const offer = {
-    _id: 1,
-    contents: ['dkfjbkdfhgkd', 'sdkfjksgfksgfjksf'],
-    price: 50,
-    createdAt: '12 dec 2020'
-  }
+router.get('/:id', async (req, res) => {
+  const offer = await OfferModel.findById(req.params.id)
   res.render('offer/offer', { offer });
 });
 
-router.post('/offers/:id', async function(req, res) {
+router.post('/:id', async function(req, res) {
   try {
     const yourOrder = await OfferModel.findById(req.params.id);
     if (yourOrder) {
