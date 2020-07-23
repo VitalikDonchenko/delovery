@@ -3,8 +3,7 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  // res.send('it is alive!')
-  res.render('home');
+  res.render('courier/courierNewOffer');
 });
 
 export default router;

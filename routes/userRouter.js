@@ -15,6 +15,7 @@ router.post('/signup', async (req, res) => {
     userPassword,
     userLocation,
   } = req.body;
+
   const newUser = new User({
     userName,
     phone: userPhone,
