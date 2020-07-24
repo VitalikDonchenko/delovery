@@ -80,7 +80,7 @@ router.post('/newOffer', async (req, res) => {
   });
   await newOffer.save();
 
-  res.redirect('/');
+  res.redirect('/courier/profile');
 });
 
 router.get('/profile', (req, res) => {
