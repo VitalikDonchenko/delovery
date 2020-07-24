@@ -1,0 +1,12 @@
+{{courier.userName}}, это Ваш личный кабинет!
+
+<span>Ваш номер телефона: {{courier.phone}}</span><br>
+<span>Ваша электронная почта: {{courier.email}}</span><br>
+
+<div>Текущий заказ: {{currentOrder}}</div>
+
+ <ul class="contents">Ваши заказы:
+      {{#each courier.ordersArchive}}
+      <li>{{this}}</li>
+      {{/each}}
+      </ul>

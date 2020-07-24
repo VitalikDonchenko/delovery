@@ -24,7 +24,6 @@ router.post('/', async (req, res) => {
 
 
 router.get('/signup', sessionCourierChecker, sessionUserChecker, (req, res) => {
-
   res.render('user/userSignup');
 });
 
