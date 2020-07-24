@@ -4,8 +4,19 @@
 <span>Ваша электронная почта: {{user.email}}</span><br>
 <span>Ваш адрес: {{user.location}}</span><br>
 
- <ul class="contents">Ваши заказы:
-      {{#each user.ordersArchive}}
+<ul class="contents">Ваши заказы:
+  {{#each user.ordersArchive}}
+  <li class="entry" id="{{_id}}">
+
+    <a href="/offers/{{_id}}"><img style="width: 15%" src="./img/bigmac.png" alt="logoRestoran"></a>
+
+    <ul class="contents">
+      {{#each contents}}
       <li>{{this}}</li>
       {{/each}}
-      </ul>
+    </ul>
+  </li>
+  <div>{{price}}</div>
+  <a href="/offers/{{_id}}"></a>
+  {{/each}}
+</ul>

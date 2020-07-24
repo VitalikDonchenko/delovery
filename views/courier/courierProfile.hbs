@@ -1,12 +1,23 @@
-{{courier.userName}}, это Ваш личный кабинет!
 
+{{courier.userName}}, это Ваш личный кабинет!
 <span>Ваш номер телефона: {{courier.phone}}</span><br>
 <span>Ваша электронная почта: {{courier.email}}</span><br>
 
-<div>Текущий заказ: {{currentOrder}}</div>
+<div>Текущий заказ: {{courier.currentOrder}}</div>
 
  <ul class="contents">Ваши заказы:
       {{#each courier.ordersArchive}}
-      <li>{{this}}</li>
+      <li class="entry" id = "{{_id}}">
+
+<a><img style = "width: 15%" src="./img/bigmac.png" alt="logoRestoran"></a>
+      
+      <ul class="contents">
+        {{#each contents}}
+        <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </li>
+    <div>{{price}}</div>
+    <a href="/offers/{{_id}}"></a>
       {{/each}}
       </ul>
