@@ -64,5 +64,4 @@ app.use('/courier', courierRouter);
 
 useErrorHandlers(app);
 
-app.listen(process.env.PORT ?? 3000);
-// export default app;
+app.listen(process.env.PORT);
