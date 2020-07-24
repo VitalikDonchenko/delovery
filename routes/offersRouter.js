@@ -26,13 +26,13 @@ router.post("/:id", async function (req, res) {
     if (yourOrder) {
       const user = await UserModel.findOne({ email: req.session.user.email });
 
-      // const yourCourier = await CourierModel.findById(yourOrder.courierId)
+      const yourCourier = await CourierModel.findById(yourOrder.courierId)
 
       user.currentOrder = yourOrder;
       yourOrder.userId = user._id;
-      // yourCourier.currentOrder = yourOrder;
+      yourCourier.currentOrder = yourOrder;
       await user.save();
-
+      await yourCourier.save();
 
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -46,7 +46,7 @@ router.post("/:id", async function (req, res) {
         from: "deloveryelbrus@gmail.com",
         to: user.email,
         subject: "Your order",
-        text: `Thank you for your choice! Your order number ${yourOrder._id}, will be delivered by courier ${/*yourCourier.userName*/ "Imambek"} within 30 minutes. To clarify the details, you can contact him at the number ${/*yourCourier.phone*/ "8181"}. Enjoy your meal!`,
+        text: `Thank you for your choice! Your order number ${yourOrder._id}, will be delivered by courier ${yourCourier.userName} within 30 minutes. To clarify the details, you can contact him at the number ${yourCourier.phone}. Enjoy your meal!`,
       };
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) console.log(err);

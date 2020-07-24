@@ -48,8 +48,9 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.get('/profile', (req, res) => {
-  res.render('user/userProfile');
+router.get('/profile', async (req, res) => {
+  const user = await User.findById(req.session.user._id)
+  res.render('user/userProfile', {user});
 });
 
 export default router;
