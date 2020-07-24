@@ -1,5 +1,6 @@
 <header>
   <div class='logo'>Наш логотип</div>
+  <img src="./img/kisspng-delivery.jpg" alt="logo" width="100" height="150">
 </header>
 
 {{#if user}}
@@ -10,21 +11,40 @@
 <a href="/logout">logout</a>
 {{else}}
 
+
+
 <p>
-  <a href="/" id="userLoginButton">Войти</a>
+  <a href="/" id="userLoginButton" class="badge badge-secondary buttonHome">Войти</a>
 <form action="/user" method="post" style="display: none" id="userLoginForm">
   <input type="text" name="email" placeholder="e-mail">
   <input type="password" name="password" placeholder="password">
   <button type="submit">Submit</button>
 </form>
 </p>
-<p>
-  <a href="/user/signup">Зарегистрироваться</a>
+
+  <a href="/user/signup" class="badge badge-secondary buttonHome">Зарегистрироваться</a>
 </p>
+
+
+
+<div class="dropdown">
+  <button class="btn badge badge-warning dropdown-toggle buttonHome" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Если ты курьер, то нажми сюда
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="/courier/signup/login" id="courierLoginButton">Войти</a>
+    <a class="dropdown-item" href="/courier/signup" id="courierSigninButton">Регистрация курьера</a>
+  </div>
 <p>
-  <a href="/courier/signup" id="showLoginButton">Если ты курьер, то нажми сюда</a>
+
+
+
+<p>
+  {{!-- <a href="/courier/signup" id="showLoginButton">Если ты курьер, то нажми сюда</a> --}}
+
+</div>
   <a href="/courier/signup/login" id="courierLoginButton" style="display: none">Войти (курьер)</a>
-<a href="/courier/signup" style="display: none" id="courierSigninButton">Регистрация курьера</a>
+  <a href="/courier/signup" style="display: none" id="courierSigninButton">Регистрация курьера</a>
 <form action="/courier" method="post" style="display: none" id="courierLoginForm">
   <input type="text" name="email" placeholder="e-mail">
   <input type="password" name="password" placeholder="password">
@@ -33,7 +53,7 @@
 </p>
 
 <form action="/geocode" method="post">
-<button type="submit">Get</button>
+  <button type="submit" class="btn btn btn-dark">Get</button>
 </form>
 
 <script src="/scripts/userLoginShow.js"></script>
@@ -43,27 +63,7 @@
 
 
 
-<div class="dropdown-menu">
-  <form class="px-4 py-3">
-    <div class="form-group">
-      <label for="exampleDropdownFormEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
-    </div>
-    <div class="form-group">
-      <label for="exampleDropdownFormPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
-    </div>
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="dropdownCheck">
-      <label class="form-check-label" for="dropdownCheck">
-        Remember me
-      </label>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </form>
-  <div class="dropdown-divider"></div>
-  <a class="dropdown-item" href="#">New around here? Sign up</a>
-  <a class="dropdown-item" href="#">Forgot password?</a>
 
-  
-</div>
+
+
+
