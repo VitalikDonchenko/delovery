@@ -1,13 +1,14 @@
-import express from 'express';
-import bcrypt from 'bcrypt';
+import express from "express";
+import bcrypt from "bcrypt";
 
-import Couriers from '../models/courierModel.js';
-import { OfferModel } from '../models/offerModel.js';
-import getCoords from '../geo_functions/getCoords.js';
+import Couriers from "../models/courierModel.js";
+import { OfferModel } from "../models/offerModel.js";
+import UserModel from "../models/userModel.js";
+import getCoords from "../geo_functions/getCoords.js";
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   const { email, password } = req.body;
   try {
     const findCourier = await Couriers.findOne({ email });
@@ -21,8 +22,8 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/signup', (req, res) => {
-  res.render('courier/courierSignup');
+router.get("/signup", (req, res) => {
+  res.render("courier/courierSignup");
 });
 
 router.post('/signup', async (req, res) => {
@@ -41,29 +42,25 @@ router.post('/signup', async (req, res) => {
     });
     await newCouriers.save();
     req.session.courier = newCouriers;
-    res.redirect('/courier/newOffer');
+    res.redirect("/courier/newOffer");
   } catch (error) {
     res.render('errors', { err: 'ЛК курьера уже создан или данные не верны!' });
   }
 });
 
-router.get('/newOffer', (req, res) => {
-  res.render('courier/courierNewOffer');
+router.get("/newOffer", (req, res) => {
+  res.render("courier/courierNewOffer");
 });
 
-router.post('/newOffer', async (req, res) => {
-  const {
-    select,
-    price,
-    location,
-  } = req.body;
+router.post("/newOffer", async (req, res) => {
+  const { select, price, location } = req.body;
 
   let picSrc;
-  if (select === 'Macdonalds') {
-    picSrc = 'Macdonalds';
+  if (select === "Macdonalds") {
+    picSrc = "Macdonalds";
   }
-  if (select === 'KFC') {
-    picSrc = 'KFC';
+  if (select === "KFC") {
+    picSrc = "KFC";
   }
   if (select === 'BurgerKing') {
     picSrc = 'BurgerKing';
@@ -83,12 +80,51 @@ router.post('/newOffer', async (req, res) => {
   });
   await newOffer.save();
 
-  res.redirect('/courier/profile');
+  const currentCourier = await Couriers.findById(req.session.courier._id);
+  currentCourier.currentOrder = newOffer;
+  await currentCourier.save();
+
+  res.redirect("/courier/profile");
 });
 
-router.get('/profile', async (req, res) => {
-  const courier = await Couriers.findById(req.session.courier._id)
-  res.render('courier/courierProfile', { courier });
+router.get("/profile", async (req, res) => {
+  const courier = await Couriers.findById(req.session.courier._id);
+  res.render("courier/courierProfile", { courier });
+});
+
+router.post("/:id", async (req, res) => {
+  const courier = await Couriers.findOne({ email: req.session.user.email });
+  const user = await UserModel.findByID( courier.currentOrder.userId);
+
+  courier.ordersArchive.push(courier.currentOrder);
+  courier.currentOrder = null;
+
+  user.ordersArchive.push(user.currentOrder);
+  user.currentOrder = null;  
+
+  await user.save();
+  await courier.save();
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_ADDRESS,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+
+  const mailOptions = {
+    from: "deloveryelbrus@gmail.com",
+    to: courier.email,
+    subject: "Deliver confirmation",
+    text: `Good day ${courier.userName}! 
+    Thank you for you order, see you soon!
+    `
+  };
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) console.log(err);
+    else console.log("email sent" + info.response);
+  });
 });
 
 export default router;
