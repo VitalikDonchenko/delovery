@@ -18,9 +18,11 @@
 <p>
   <a href="/" id="userLoginButton" class="badge badge-secondary buttonHome">Войти</a>
 <form action="/user" method="post" style="display: none" id="userLoginForm">
-  <input type="text" name="email" placeholder="e-mail">
-  <input type="password" name="password" placeholder="password">
-  <button type="submit" class="btn btn-success">Submit</button>
+
+  <input type="text" name="email" placeholder="e-mail" required>
+  <input type="password" name="password" placeholder="password" required>
+  <button type="submit">Submit</button>
+
 </form>
 </p>
 
@@ -48,9 +50,11 @@
   <a href="/courier/signup/login" id="courierLoginButton" style="display: none">Войти (курьер)</a>
   <a href="/courier/signup" style="display: none" id="courierSigninButton">Регистрация курьера</a>
 <form action="/courier" method="post" style="display: none" id="courierLoginForm">
-  <input type="text" name="email" placeholder="e-mail">
-  <input type="password" name="password" placeholder="password">
-  <button type="submit" class="btn btn-success">Submit</button>
+
+  <input type="text" name="email" placeholder="e-mail" required>
+  <input type="password" name="password" placeholder="password" required>
+  <button type="submit">Submit</button>
+
 </form>
 </p>
 
