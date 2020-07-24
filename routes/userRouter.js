@@ -23,15 +23,14 @@ router.get('/signup', sessionCourierChecker, sessionUserChecker, (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
+  const {
+    userName,
+    userPhone,
+    userEmail,
+    userPassword,
+    userLocation,
+  } = req.body;
   try {
-    const {
-      userName,
-      userPhone,
-      userEmail,
-      userPassword,
-      userLocation,
-    } = req.body;
-
     const newUser = new User({
       userName,
       phone: userPhone,
