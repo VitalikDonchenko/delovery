@@ -1,18 +1,18 @@
 <h2>Offers:</h2>
 
-<div id="logoHolder">
+{{!-- <div id="logoHolder">
   <img src="{{}}" alt="logoRestoran">
-</div>
+</div> --}}
 
 <main role="main">
   <ul class="offers">
     {{#each offers}}
-    <li class="entry" id = "{{_id}}">
-      <img src="{{}}" alt="logoRestoran">
+    <li class="entry" id="{{_id}}">
+      {{!-- <img src="{{}}" alt="logoRestoran"> --}}
       <ul class="contents">
-      {{#each contents}}
-      <li>{{this}}</li>
-      {{/each}}
+        {{#each contents}}
+        <li>{{this}}</li>
+        {{/each}}
       </ul>
     </li>
     <div>{{price}}</div>
@@ -20,4 +20,3 @@
     {{/each}}
   </ul>
 </main>
-  

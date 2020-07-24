@@ -9,47 +9,52 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const offers = await OfferModel.find();
+  // console.log(offersList);
   res.render('offer/offers', { offers });
 });
 
-router.get('/:id', async (req, res) => {
-  const offer = await OfferModel.findById(req.params.id)
+router.get('/:id', (req, res) => {
+  const offer = {
+    _id: 1,
+    contents: ['dkfjbkdfhgkd', 'sdkfjksgfksgfjksf'],
+    price: 50,
+    createdAt: '12 dec 2020',
+  };
   res.render('offer/offer', { offer });
 });
 
-router.post('/:id', async function(req, res) {
+router.post('/offers/:id', async (req, res) => {
   try {
     const yourOrder = await OfferModel.findById(req.params.id);
     if (yourOrder) {
-      const user = await UserModel.findOne({email : req.session.user.email});
-      const yourCourier = await CourierModel.findById(yourOrder.courierId)
+      const user = await UserModel.findOne({ email: req.session.user.email });
+      const yourCourier = await CourierModel.findById(yourOrder.courierId);
       user.currentOrder = yourOrder;
       await user.save();
     }
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: 'gmail',
       auth: {
+
         user: process.env.EMAIL_ADDRESS,
         pass: process.env.EMAIL_PASSWORD,
+
       },
     });
-  
+
     const mailOptions = {
       from: 'deloveryelbrus@gmail.com',
       to: user.email,
       subject: 'Your order',
-      text: `Thank you for your choice! Your order number ${yourOrder._id}, will be delivered by courier ${yourCourier.userName} within 30 minutes. To clarify the details, you can contact him at the number ${yourCourier.phone}. Enjoy your meal!`
+      text: `Thank you for your choice! Your order number ${yourOrder._id}, will be delivered by courier ${yourCourier.userName} within 30 minutes. To clarify the details, you can contact him at the number ${yourCourier.phone}. Enjoy your meal!`,
     };
-     transporter.sendMail(mailOptions, (err, info) => {
-       if (err) console.log(err);
-       else console.log('email sent' + info.response);
-     })
-  
-
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) console.log(err);
+      else console.log(`email sent${info.response}`);
+    });
   } catch (error) {
-    
   }
-})
+});
 
 export default router;
