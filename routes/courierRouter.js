@@ -5,6 +5,10 @@ import Couriers from "../models/courierModel.js";
 import { OfferModel } from "../models/offerModel.js";
 import UserModel from "../models/userModel.js";
 import getCoords from "../geo_functions/getCoords.js";
+import nodemailer from "nodemailer";
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const router = express.Router();
 
@@ -92,9 +96,9 @@ router.get("/profile", async (req, res) => {
   res.render("courier/courierProfile", { courier });
 });
 
-router.post("/:id", async (req, res) => {
-  const courier = await Couriers.findOne({ email: req.session.user.email });
-  const user = await UserModel.findByID( courier.currentOrder.userId);
+router.post("/confirm", async (req, res) => {
+  const courier = await Couriers.findOne({ email: req.session.courier.email });
+  const user = await UserModel.findById( courier.currentOrder.userId);
 
   courier.ordersArchive.push(courier.currentOrder);
   courier.currentOrder = null;
@@ -115,9 +119,9 @@ router.post("/:id", async (req, res) => {
 
   const mailOptions = {
     from: "deloveryelbrus@gmail.com",
-    to: courier.email,
+    to: user.email,
     subject: "Deliver confirmation",
-    text: `Good day ${courier.userName}! 
+    text: `Good day ${user.userName}! 
     Thank you for you order, see you soon!
     `
   };
@@ -125,6 +129,7 @@ router.post("/:id", async (req, res) => {
     if (err) console.log(err);
     else console.log("email sent" + info.response);
   });
+  res.redirect("/courier/profile")
 });
 
 export default router;
