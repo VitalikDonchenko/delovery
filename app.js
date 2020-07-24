@@ -11,12 +11,14 @@ import offersRouter from './routes/offersRouter.js';
 import userRouter from './routes/userRouter.js';
 import courierRouter from './routes/courierRouter.js';
 import { cookiesCleaner } from './middleware/sessionWorker.js'
+import dotenv from 'dotenv';
+dotenv.config();
 
 const FileStore = FileStoreGeneral(session);
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/delovery', {
+mongoose.connect(`mongodb+srv://alex:${process.env.DATABASE_PASSWORD}@cluster0.xhfoe.mongodb.net/${process.env.DATABASE_NAME}?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

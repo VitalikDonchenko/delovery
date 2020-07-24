@@ -12,7 +12,7 @@
 <div>
   <li class="entry" id="{{courier.currentOrder._id}}">
 
-    <a><img style="width: 15%" src="./img/bigmac.png" alt="logoRestoran"></a>
+    <a><img style="width: 5%" src="/img/{{courier.currentOrder.picSrc}}.png" alt="logoRestoran"></a>
 
     <ul class="contents">
       {{#each courier.currentOrder.contents}}
@@ -34,7 +34,7 @@
   {{#each courier.ordersArchive}}
   <li class="entry" id="{{_id}}">
 
-    <a><img style="width: 15%" src="./img/bigmac.png" alt="logoRestoran"></a>
+    <a><img style="width: 5%" src="/img/{{picSrc}}.png" alt="logoRestoran"></a>
 
     <ul class="contents">
       {{#each contents}}

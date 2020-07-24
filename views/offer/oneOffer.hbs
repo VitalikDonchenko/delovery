@@ -2,7 +2,7 @@
 
 Вы выбрали следующие позиции:
     <div class="entry" id = "{{offer._id}}"></div>
-      {{!-- <img src="{{}}" alt="logoRestoran"> --}}
+      <img src="/img/{{offer.picSrc}}.png" style="width: 5%" alt="logoRestoran">
       <ul class="contents">
       {{#each offer.contents}}
       <li>{{this}}</li>
