@@ -2,6 +2,7 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 
 import User from '../models/userModel.js';
+import getCoords from '../geo_functions/getCoords.js';
 
 import { sessionCourierChecker, sessionUserChecker } from '../middleware/sessionWorker.js'
 
@@ -37,6 +38,7 @@ router.post('/signup', async (req, res) => {
       email: userEmail,
       password: await bcrypt.hash(userPassword, 10),
       location: userLocation,
+      coordinates: await getCoords(userLocation),
     });
     await newUser.save();
     req.session.user = newUser;
