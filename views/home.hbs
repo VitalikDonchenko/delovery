@@ -1,14 +1,14 @@
 
 <header>
   {{!-- <div class='logo'>Наш логотип</div> --}}
-  <img src="./img/959-9592035_-png-png.png" alt="logo" width="160" height="150">
+  {{!-- <img src="./img/959-9592035_-png-png.png" alt="logo" width="160" height="150"> --}}
 </header>
 
 {{#if user}}
 <a href="/user/profile">{{user.userName}}</a>
 <a href="/logout">logout</a>
 {{else if courier}}
-<a href="/offer">{{courier.userName}}</a>
+<a href="/courier/profile">{{courier.userName}}</a>
 <a href="/logout">logout</a>
 {{else}}
 
@@ -80,13 +80,13 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="./img/bigmac.jpg" alt="..." class=" w-100" width="500" height="700">
+      <img src="./img/mac.jpg" alt="..." class=" w-100">
     </div>
     <div class="carousel-item">
-      <img src="./img/potato.png" class="d-block w-100" alt="..."  height="800">
+      <img src="./img/bigmac.png" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="./img/bigmacpot.jpeg" class="d-block w-100" alt="..."  height="800">
+      <img src="./img/bigmacpot.jpeg" class="d-block w-100" alt="...">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
