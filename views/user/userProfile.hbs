@@ -1,2 +1,11 @@
-{{!-- {{Имя пользователя}}, это Ваш личный кабинет! --}}
-<div></div>
+{{user.userName}}, это Ваш личный кабинет!
+
+<span>Ваш номер телефона: {{user.phone}}</span><br>
+<span>Ваша электронная почта: {{user.phone}}</span><br>
+<span>Ваш адрес: {{user.location}}</span><br>
+
+ <ul class="contents">Ваши заказы:
+      {{#each user.ordersArchive}}
+      <li>{{this}}</li>
+      {{/each}}
+      </ul>
