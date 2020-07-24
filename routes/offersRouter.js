@@ -4,14 +4,17 @@ import UserModel from "../models/userModel.js";
 import CourierModel from "../models/courierModel.js";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
+import compareCoords from '../geo_functions/compareCoords.js'
 dotenv.config();
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
   const offers = await OfferModel.find();
-
-  res.render("offer/offers", { offers });
+  const closeOffers = offers.filter(offer => {
+    if (compareCoords(offer.coordinates, req.session.user.coordinates, 5)) return offer;
+  });
+  res.render("offer/offers", { offers: closeOffers });
 });
 
 router.get("/:id", async (req, res) => {
