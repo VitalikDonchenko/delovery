@@ -2,6 +2,8 @@ import express from 'express';
 import { OfferModel } from '../models/offerModel.js';
 import UserModel from '../models/userModel.js';
 import CourierModel from '../models/courierModel.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const router = express.Router();
 
@@ -28,8 +30,8 @@ router.post('/:id', async function(req, res) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "deloveryelbrus@gmail.com",
-        pass: "Lyt5FPy27A",
+        user: process.env.EMAIL_ADDRESS,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
   
