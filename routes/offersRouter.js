@@ -10,6 +10,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const offers = await OfferModel.find();
+
   res.render("offer/offers", { offers });
 });
 
@@ -19,15 +20,19 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/:id", async function (req, res) {
+
   try {
     const yourOrder = await OfferModel.findById(req.params.id);
     if (yourOrder) {
       const user = await UserModel.findOne({ email: req.session.user.email });
+
       // const yourCourier = await CourierModel.findById(yourOrder.courierId)
+
       user.currentOrder = yourOrder;
       yourOrder.userId = user._id;
       // yourCourier.currentOrder = yourOrder;
       await user.save();
+
 
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -51,6 +56,7 @@ router.post("/:id", async function (req, res) {
     }
   } catch (error) {
     res.send(error.message);
+
   }
 });
 
