@@ -5,11 +5,7 @@ import User from '../models/userModel.js';
 
 import { sessionCourierChecker, sessionUserChecker } from '../middleware/sessionWorker.js'
 
-
-// console.log('started user');
-
 const router = express.Router();
-
 
 router.post('/', async (req, res) => {
   const { email, password } = req.body;
@@ -20,8 +16,6 @@ router.post('/', async (req, res) => {
   }
   return res.redirect('signup');
 });
-
-
 
 router.get('/signup', sessionCourierChecker, sessionUserChecker, (req, res) => {
   res.render('user/userSignup');
@@ -50,6 +44,10 @@ router.post('/signup', async (req, res) => {
   } catch (error) {
     console.log('BD userSave is NOT working!');
   }
+});
+
+router.get('/profile', (req, res) => {
+  res.render('user/userProfile');
 });
 
 export default router;
