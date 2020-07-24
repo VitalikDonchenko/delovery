@@ -65,7 +65,7 @@ router.post('/newOffer', async (req, res) => {
   if (select === 'KFC') {
     picSrc = 'KFC';
   }
-  if (select === 'KFC') {
+  if (select === 'BurgerKing') {
     picSrc = 'BurgerKing';
   }
 
