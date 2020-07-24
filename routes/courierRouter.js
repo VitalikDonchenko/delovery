@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 
 import Couriers from '../models/courierModel.js';
 import { OfferModel } from '../models/offerModel.js';
+import getCoords from '../geo_functions/getCoords.js';
 
 const router = express.Router();
 
@@ -50,9 +51,8 @@ router.get('/newOffer', (req, res) => {
 router.post('/newOffer', async (req, res) => {
   const {
     select,
-    newOffer1,
-    newOffer2,
     price,
+    location,
   } = req.body;
 
   let picSrc;
@@ -66,19 +66,25 @@ router.post('/newOffer', async (req, res) => {
     picSrc = 'BurgerKing';
   }
 
-  const values = Object.values(req.body).slice(1, -1);
-
+  const values = Object.values(req.body).slice(1, -2);
   const courierId = req.session.courier._id;
+
   const newOffer = new OfferModel({
     contents: [...values],
     picSrc,
     price,
     createdAt: new Date(),
     courierId,
+    location,
+    coordinates: await getCoords(location),
   });
   await newOffer.save();
 
   res.redirect('/');
+});
+
+router.get('/profile', (req, res) => {
+  res.render('courier/courierProfile');
 });
 
 export default router;
