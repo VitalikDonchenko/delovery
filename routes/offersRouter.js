@@ -44,17 +44,37 @@ router.post("/:id", async function (req, res) {
           pass: process.env.EMAIL_PASSWORD,
         },
       });
-
-      const mailOptions = {
+      const courierMailOptions = {
         from: "deloveryelbrus@gmail.com",
         to: user.email,
         subject: "Your order",
-        text: `Thank you for your choice! Your order number ${yourOrder._id}, will be delivered by courier ${yourCourier.userName} within 30 minutes. To clarify the details, you can contact him at the number ${yourCourier.phone}. Enjoy your meal!`,
+        text: `Good day ${user.userName}! 
+        Thank you for your choice! Your order number ${yourOrder._id}, will be delivered by courier ${yourCourier.userName} within 30 minutes.
+        To clarify the details, you can contact him via number ${yourCourier.phone}.
+        Enjoy your meal!`,
+      };
+
+      const mailOptions = {
+        from: "deloveryelbrus@gmail.com",
+        to: yourCourier.email,
+        subject: "Your order",
+        text: `Good day ${yourCourier.userName}! 
+        Your order number ${yourOrder._id}, have been paid by ${user.userName}.
+        It must be delivered to the address ${user.location} within 30 minutes. To clarify the details, you can contact him via number ${user.phone}.
+        Thanks for your work!`,
       };
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) console.log(err);
         else console.log("email sent" + info.response);
       });
+      transporter.sendMail(courierMailOptions, (err, info) => {
+        if (err) console.log(err);
+        else console.log("email sent" + info.response);
+      });
+      OfferModel.findByIdAndDelete(req.params.id, function(err) {
+        if (err) console.log(err);
+        console.log("Successful deletion");
+      })
       res.redirect("/");
     }
   } catch (error) {
