@@ -83,8 +83,9 @@ router.post('/newOffer', async (req, res) => {
   res.redirect('/courier/profile');
 });
 
-router.get('/profile', (req, res) => {
-  res.render('courier/courierProfile');
+router.get('/profile', async (req, res) => {
+  const courier = await Couriers.findById(req.session.courier._id)
+  res.render('courier/courierProfile', {courier});
 });
 
 export default router;

@@ -2,9 +2,9 @@
 
 <a href="/">home</a>
 <a href="/user/profile">profile</a>
-{{!-- <div id="logoHolder">
-  <img src="{{}}" alt="logoRestoran">
-</div> --}}
+<div id="logoHolder">
+  {{!-- <img src="{{}}" alt="logoRestoran"> --}}
+</div>
 
 <main role="main">
   <ul class="offers">
@@ -12,7 +12,8 @@
 
     <li class="entry" id = "{{_id}}">
 
-      {{!-- <img src="{{}}" alt="logoRestoran"> --}}
+<a href="/offers/{{_id}}"><img style = "width: 15%" src="./img/bigmac.png" alt="logoRestoran"></a>
+      
       <ul class="contents">
         {{#each contents}}
         <li>{{this}}</li>
@@ -20,7 +21,7 @@
       </ul>
     </li>
     <div>{{price}}</div>
-    <a href="./offers/{{_id}}"></a>
+    <a href="/offers/{{_id}}"></a>
     {{/each}}
   </ul>
 </main>
