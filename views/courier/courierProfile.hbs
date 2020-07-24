@@ -1,26 +1,48 @@
 
 
+
 <br>Здравствуйте, {{courier.userName}}!<br>
  Это Ваш личный кабинет<br>
+
 <span>Ваш номер телефона: {{courier.phone}}</span><br>
 <span>Ваша электронная почта: {{courier.email}}</span><br>
 
-<div>Текущий заказ: {{courier.currentOrder}}</div>
+Текущий заказ:
+{{#if courier.currentOrder}}
+<div>
+  <li class="entry" id="{{courier.currentOrder._id}}">
 
- <ul class="contents">Ваши заказы:
-      {{#each courier.ordersArchive}}
-      <li class="entry" id = "{{_id}}">
+    <a><img style="width: 15%" src="./img/bigmac.png" alt="logoRestoran"></a>
 
-<a><img style = "width: 15%" src="./img/bigmac.png" alt="logoRestoran"></a>
-      
-      <ul class="contents">
-        {{#each contents}}
-        <li>{{this}}</li>
-        {{/each}}
-      </ul>
-    </li>
-    <div>{{price}}</div>
-    <a href="/offers/{{_id}}"></a>
+    <ul class="contents">
+      {{#each courier.currentOrder.contents}}
+      <li>{{this}}</li>
       {{/each}}
-      </ul>
+    </ul>
+  </li>
+  <div>{{courier.currentOrder.price}}</div>
+  <form action="/courier/confirm" method="post">
+    <button type="submit">Подтвердить получение заказа</button>
+  </form>
+</div>
+{{else}}
+  <form action="/courier/newOffer" method="get">
+    <button type="submit">Создать предложение</button>
+  </form>
+{{/if}}
+<ul class="contents">Ваши заказы:
+  {{#each courier.ordersArchive}}
+  <li class="entry" id="{{_id}}">
 
+    <a><img style="width: 15%" src="./img/bigmac.png" alt="logoRestoran"></a>
+
+    <ul class="contents">
+      {{#each contents}}
+      <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </li>
+  <div>{{price}}</div>
+  <a href="/offers/{{_id}}"></a>
+  {{/each}}
+</ul>
