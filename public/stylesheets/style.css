@@ -12,6 +12,27 @@ padding-left: 20px;
     /* background-color: black; */
 }
 
+.toRight {
+  position: absolute;
+  right: 3%;
+  top: 5%;
+  padding: 18px;
+}
+
+.toRightLogout {
+  position: absolute;
+  padding: 18px;
+  right: 12%;
+  top: 5%;
+}
+
+.toRightIf {
+  position: absolute;
+  padding: 18px;
+  right: 33%;
+  top: -95px;
+}
+
 .buttonHome {
     font-size: 20px;
 }
