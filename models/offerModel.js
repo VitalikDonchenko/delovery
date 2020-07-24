@@ -6,6 +6,7 @@ export const offerScheme = mongoose.Schema({
   price: Number,
   createdAt: Date,
   courierId: String,
+  userId: String,
   location: String,
   coordinates: String,
 });
