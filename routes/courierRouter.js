@@ -66,9 +66,11 @@ router.post('/newOffer', async (req, res) => {
     picSrc = 'BurgerKing';
   }
 
+  const values = Object.values(req.body).slice(1, -1);
+
   const courierId = req.session.courier._id;
   const newOffer = new OfferModel({
-    contents: [newOffer1, newOffer2],
+    contents: [...values],
     picSrc,
     price,
     createdAt: new Date(),

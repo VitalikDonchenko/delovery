@@ -49,7 +49,7 @@ router.post('/offers/:id', async (req, res) => {
       if (err) console.log(err);
       else console.log(`email sent${info.response}`);
     });
-  } catch (error) 
+  } catch (error) {
   }
 });
 
