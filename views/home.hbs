@@ -6,17 +6,17 @@
 
 
 {{#if user}}
-<a href="/user/profile" class="badge badge-success butUserCourier">Личный кабинет пользователя {{user.userName}}</a>
-<a href="/logout" class="badge badge-warning butUserCourier">logout</a>
+<a href="/user/profile" class="badge badge-success butUserCourier toRight">Profile{{user.userName}}</a> 
+<a href="/logout" class="badge badge-warning butUserCourier toRightLogout">logout</a>
 {{else if courier}}
-<a href="/courier/profile" class="badge badge-success butUserCourier">Личный кабинет пользователя {{courier.userName}}</a>
-<a href="/logout" class="badge badge-warning butUserCourier">logout</a>
+<a href="/courier/profile" class="badge badge-success butUserCourier toRight">Profile{{courier.userName}}</a>
+<a href="/logout" class="badge badge-warning butUserCourier toRightLogout">logout</a>
 {{else}}
 
 
 
 <p>
-  <a href="/" id="userLoginButton" class="badge badge-secondary buttonHome">Войти</a>
+  <a href="/" id="userLoginButton" class="badge badge-secondary buttonHome ">Войти</a>
 <form action="/user" method="post" style="display: none" id="userLoginForm">
 
   <input type="text" name="email" placeholder="e-mail" required>
@@ -26,7 +26,7 @@
 </form>
 </p>
 
-  <a href="/user/signup" class="badge badge-secondary buttonHome">Зарегистрироваться</a>
+  <a href="/user/signup" class="badge badge-secondary buttonHome ">Зарегистрироваться</a>
 </p>
 
 
@@ -76,7 +76,7 @@
     <p>kjhkk</p>
   </div>
 </div> --}}
-<div class="container carouselHome">
+<div class="container carouselHome" class="carouselHomeClass">
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
