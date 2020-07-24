@@ -10,27 +10,30 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
-  const findCourier = await Couriers.findOne({ email });
-  if (findCourier && (await bcrypt.compare(password, findCourier.password))) {
-    req.session.courier = findCourier;
-    return res.redirect("/courier/newOffer");
+  try {
+    const findCourier = await Couriers.findOne({ email });
+    if (findCourier && await bcrypt.compare(password, findCourier.password)) {
+      req.session.courier = findCourier;
+      return res.redirect('/courier/newOffer');
+    }
+    res.render('errors', { err: 'Личный кабинет курьера не найден!' });
+  } catch (error) {
+    res.send(error);
   }
-  return res.redirect("/");
 });
 
 router.get("/signup", (req, res) => {
   res.render("courier/courierSignup");
 });
 
-router.post("/signup", async (req, res) => {
+router.post('/signup', async (req, res) => {
+  const {
+    courierName,
+    courierphone,
+    courieremail,
+    courierpassword,
+  } = req.body;
   try {
-    const {
-      courierName,
-      courierphone,
-      courieremail,
-      courierpassword,
-    } = req.body;
-
     const newCouriers = new Couriers({
       userName: courierName,
       phone: courierphone,
@@ -41,7 +44,7 @@ router.post("/signup", async (req, res) => {
     req.session.courier = newCouriers;
     res.redirect("/courier/newOffer");
   } catch (error) {
-    console.log("BD courierSave is NOT working!");
+    res.render('errors', { err: 'ЛК курьера уже создан или данные не верны!' });
   }
 });
 
@@ -59,8 +62,8 @@ router.post("/newOffer", async (req, res) => {
   if (select === "KFC") {
     picSrc = "KFC";
   }
-  if (select === "KFC") {
-    picSrc = "BurgerKing";
+  if (select === 'BurgerKing') {
+    picSrc = 'BurgerKing';
   }
 
   const values = Object.values(req.body).slice(1, -2);

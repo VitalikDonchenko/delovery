@@ -4,12 +4,13 @@
   {{!-- <img src="./img/959-9592035_-png-png.png" alt="logo" width="160" height="150"> --}}
 </header>
 
+
 {{#if user}}
-<a href="/user/profile">{{user.userName}}</a>
-<a href="/logout">logout</a>
+<a href="/user/profile" class="badge badge-success butUserCourier">Личный кабинет пользователя {{user.userName}}</a>
+<a href="/logout" class="badge badge-warning butUserCourier">logout</a>
 {{else if courier}}
-<a href="/courier/profile">{{courier.userName}}</a>
-<a href="/logout">logout</a>
+<a href="/courier/profile" class="badge badge-success butUserCourier">Личный кабинет пользователя {{courier.userName}}</a>
+<a href="/logout" class="badge badge-warning butUserCourier">logout</a>
 {{else}}
 
 
@@ -17,9 +18,11 @@
 <p>
   <a href="/" id="userLoginButton" class="badge badge-secondary buttonHome">Войти</a>
 <form action="/user" method="post" style="display: none" id="userLoginForm">
-  <input type="text" name="email" placeholder="e-mail">
-  <input type="password" name="password" placeholder="password">
+
+  <input type="text" name="email" placeholder="e-mail" required>
+  <input type="password" name="password" placeholder="password" required>
   <button type="submit">Submit</button>
+
 </form>
 </p>
 
@@ -47,9 +50,11 @@
   <a href="/courier/signup/login" id="courierLoginButton" style="display: none">Войти (курьер)</a>
   <a href="/courier/signup" style="display: none" id="courierSigninButton">Регистрация курьера</a>
 <form action="/courier" method="post" style="display: none" id="courierLoginForm">
-  <input type="text" name="email" placeholder="e-mail">
-  <input type="password" name="password" placeholder="password">
+
+  <input type="text" name="email" placeholder="e-mail" required>
+  <input type="password" name="password" placeholder="password" required>
   <button type="submit">Submit</button>
+
 </form>
 </p>
 
